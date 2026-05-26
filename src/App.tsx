@@ -114,7 +114,7 @@ export default function App() {
 
   return (
     <div className="flex h-dvh bg-neutral-500 p-16">
-      <div className="mx-auto flex w-xl flex-col items-center rounded-lg bg-neutral-300 p-8">
+      <div className="mx-auto flex w-xl flex-col items-center rounded-lg bg-neutral-200/75 p-8 shadow-2xl">
         <h1 className="text-bold my-4 text-4xl">shoppinglist.</h1>
         <div className="flex w-full">
           <Input
@@ -137,63 +137,67 @@ export default function App() {
         <Button
           onClick={handleSubmit}
           disabled={listItem.product.length < 1}
-          className="mt-1 mb-3 w-full rounded-b-lg bg-neutral-500/75 px-4 py-2 transition duration-300 ease-in-out hover:enabled:bg-emerald-600/30"
+          className="mt-1 mb-3 w-full rounded-b-lg bg-neutral-500/75 px-4 py-2 shadow-lg transition duration-300 ease-in-out hover:enabled:bg-emerald-600/30"
         >
           Produkt hinzufügen
         </Button>
-        <div className="container scrollbar-thin overflow-auto scroll-smooth">
-          {sortedItems.map((item) => (
-            <div
-              className="mt-3 flex items-center justify-between rounded-lg border border-neutral-500 p-2"
-              key={item.id}
-            >
-              <div>
-                <h2
-                  className={
-                    "text-lg font-semibold" +
-                    (item.checked
-                      ? "text-neutral-500 line-through opacity-50"
-                      : "")
-                  }
-                >
-                  {item.product}
-                </h2>
-                <p
-                  className={
-                    "text-sm text-neutral-600" +
-                    (item.checked
-                      ? "text-neutral-500 line-through opacity-50"
-                      : "")
-                  }
-                >
-                  Anzahl: {item.amount}
-                </p>
-              </div>
-              <div>
-                {!item.checked ? (
-                  <Button
-                    onClick={() => handleCheck(item.id)}
-                    className="flex gap-2 rounded-md bg-emerald-600/70 px-3 py-1 transition duration-300 ease-in-out hover:bg-emerald-500"
+        <div className="container scrollbar-thin overflow-auto scroll-smooth pb-8">
+          {items.length === 0 ? (
+            <p className="m-4">...keine Einträge!</p>
+          ) : (
+            sortedItems.map((item) => (
+              <div
+                className="mt-5 flex items-center justify-between rounded-lg border border-neutral-400 bg-neutral-200 p-2 shadow-lg"
+                key={item.id}
+              >
+                <div>
+                  <h2
+                    className={
+                      "text-lg font-semibold" +
+                      (item.checked
+                        ? "text-neutral-500 line-through opacity-50"
+                        : "")
+                    }
                   >
-                    <RiShoppingCart2Line />
-                    check
-                  </Button>
-                ) : (
-                  <div className="flex gap-4">
-                    <Button onClick={() => handleCheck(item.id)}>
-                      <RiArrowGoBackLine />
-                    </Button>
+                    {item.product}
+                  </h2>
+                  <p
+                    className={
+                      "text-sm text-neutral-600" +
+                      (item.checked
+                        ? "text-neutral-500 line-through opacity-50"
+                        : "")
+                    }
+                  >
+                    Anzahl: {item.amount}
+                  </p>
+                </div>
+                <div>
+                  {!item.checked ? (
                     <Button
-                      onClick={() => handleDelete(item.id)}
-                      className="flex gap-2 rounded-md bg-red-500/75 px-3 py-1 transition duration-300 ease-in-out hover:bg-red-600/75"
+                      onClick={() => handleCheck(item.id)}
+                      className="flex gap-2 rounded-md bg-emerald-600/70 px-3 py-1 transition duration-300 ease-in-out hover:bg-emerald-500"
                     >
-                      <RiDeleteBin2Line />
+                      <RiShoppingCart2Line />
+                      check
                     </Button>
-                  </div>
-                )}
+                  ) : (
+                    <div className="flex gap-4">
+                      <Button onClick={() => handleCheck(item.id)}>
+                        <RiArrowGoBackLine />
+                      </Button>
+                      <Button
+                        onClick={() => handleDelete(item.id)}
+                        className="flex gap-2 rounded-md bg-red-500/75 px-3 py-1 transition duration-300 ease-in-out hover:bg-red-600/75"
+                      >
+                        <RiDeleteBin2Line />
+                      </Button>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>
