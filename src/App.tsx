@@ -95,7 +95,7 @@ export default function App() {
         amount: 1,
         checked: false,
       });
-      toast.success("Produkt wurde zur Liste hinzugefügt!");
+      toast.success("Produkt wurde zur Liste hinzugefügt.");
     }
   }
 
@@ -105,7 +105,7 @@ export default function App() {
 
   function handleDelete(itemId: string) {
     dispatch({ type: ACTION.DELETE, payload: itemId });
-    toast.info("Produkt wurde aus der Liste gelöscht!");
+    toast.info("Produkt wurde aus der Liste gelöscht.");
   }
 
   useEffect(() => {
